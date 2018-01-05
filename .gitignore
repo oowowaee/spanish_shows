@@ -1,1 +1,7 @@
+**/*.pyc
 config.py
+csv/*
+cookies.pkl
+show_data.pkl
+scraped_data.pkl
+ghostdriver.log
