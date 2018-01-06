@@ -22,7 +22,6 @@ def main():
 
 def _convert_records(records):
   records = NetflixDataConverter().convert_to_show_data(records)
-  pdb.set_trace()
   pickle.dump(records, open('show_data.pkl', 'wb'))
   return
 

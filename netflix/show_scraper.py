@@ -58,7 +58,6 @@ class NetflixShowScraper:
   # Navigate through all the seasons, and scroll right while we still can appending the episode data
   def _harvest_episode_text(self, el):
     text = []
-    season_text = ''
     season_dropdown = el.find_element_by_css_selector('.nfDropDown')
     time.sleep(.5)
     season_dropdown.find_element_by_class_name('label').click()
@@ -71,21 +70,21 @@ class NetflixShowScraper:
       # Stupid La Mante has the seasons listed in french
       season_dropdown.find_elements_by_css_selector('.sub-menu-list .sub-menu-link')[current_season - 1].click()
       time.sleep(.5)
+      season_text = season_dropdown.text + '\n'
       try:
         while True:
-          pdb.set_trace()
-          season_text += el.find_element_by_class_name('episodesContainer').text
+          season_text += el.find_element_by_class_name('episodeWrapper').text + '\n'
 
           wait = WebDriverWait(self._browser, 2)
           caret = el.find_element_by_class_name('icon-rightCaret')
           #caret = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'icon-rightCaret')))
           caret.click()
-          time.sleep(.5)
+          time.sleep(1)
       except (NoSuchElementException, ElementNotVisibleException, IndexError) as e:
         current_season += 1
         text.append(season_text)
         season_text = ''
       except WebDriverException as e:
-        pdb.set_trace()
+        pass
 
     return text

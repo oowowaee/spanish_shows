@@ -54,7 +54,7 @@ class NetflixScraper:
 
     self._find_language_content()
 
-    self._results = self._harvest_content(0, 0, 2)
+    self._results = self._harvest_content(0, 0, 1)
 
     return self._results
 
